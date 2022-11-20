@@ -29,12 +29,12 @@ class ContaoCollapsibleSidebar {
         }
 
         if (!this.togglers.length) {
-            console.error('No toggler for collapsing the sidebar found!');
+            console.error('No toggle button for collapsing the sidebar found!');
             return;
         }
 
         if (!this.sidebar) {
-            console.error('No sidebar element with ID ' + this.id + 'found!');
+            console.error('Could not find the sidebar element with ID ' + this.id + '!');
             return;
         }
 
@@ -110,7 +110,3 @@ class ContaoCollapsibleSidebar {
         }
     }
 }
-
-
-
-
