@@ -1,0 +1,1 @@
+.mod_collapsible_sidebar {position: fixed;top: 0;left: 0;width: 400px;height: 100%;transition: margin-left 0.4s ease-in-out;background-color: #eeeeee;margin-left: -400px;z-index: 9999;}.mod_collapsible_sidebar .inside {padding: 24px;}body.sidebar-expanded .mod_collapsible_sidebar {margin-left: 0;}
