@@ -1,0 +1,55 @@
+{% do addJavascriptResource('bundles/markocupiccontaocollapsiblesidebar/js/collapsible_sidebar.js') %}
+
+{# Remove the following line, when using your own CSS. #}
+{% do addCssResource('bundles/markocupiccontaocollapsiblesidebar/css/collapsible_sidebar.css') %}
+
+{% extends '@Contao/block_unsearchable' %}
+
+{% block content %}
+    <div class="inside">
+        {#
+        <!--
+        Use the '{{collapsible_sidebar_toggle}} insert tag to embed the toggle button:
+        Read the documentation in https://github.com/markocupic/contao-collapsible-sidebar#readme) to learn how to create your own toggle button.
+        -->
+        #}
+        {{ '{{collapsible_sidebar_toggle::' ~ css_id ~ '}}'|raw }}
+
+        {#
+        <!--
+        Feel fre to build your own customized button (dont't forget to add the mandatory class- and aria-attributes!):
+        -->
+        <div id="collapsibleSidebarToggle" class="collapsible-sidebar-toggle" role="button" aria-expanded="true" aria-haspopup="true" aria-controls="' ~ css_id ~ '" aria-hidden="false">
+            <span class="icon">☰</span> Open Sidebar
+        </div>
+        #}
+
+        <h1>I'm your collapsible content.</h1>
+
+        {#
+        <!--
+        Your custom content goes here. Add frontend modules, articles, html and what ever you want:
+        -->
+
+        {{ '{{insert_module::99 }}'|raw }}
+
+        {{ '{{insert_article::999 }}'|raw }}
+
+        <div>
+            <p>Lorem ipsum...</p>
+        </div>
+        #}
+
+
+        {# Initialize/instantiate the ContaoCollapsibleSidebar object.  #}
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                new ContaoCollapsibleSidebar('{{ css_id }}');
+            });
+        </script>
+
+    </div>
+
+    {{ parent() }}
+
+{% endblock %}
