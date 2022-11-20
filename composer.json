@@ -4,7 +4,7 @@
     "keywords": [
         "contao",
         "bundle",
-        "sidbar",
+        "sidebar",
         "collapse"
     ],
     "type": "contao-bundle",
