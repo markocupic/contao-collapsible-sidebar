@@ -15,9 +15,11 @@ Please visit https://github.com/markocupic/contao-collapsible-sidebar#readme lea
         Please visit https://github.com/markocupic/contao-collapsible-sidebar#readme learn more about how to configure the extension.
 
         Here comes the toggle button:
-        Use the '{{collapsible_sidebar_toggle}} insert tag to embed the toggle button:
+        Use TWIG or a contao insert tag to include toggle button:
+            TWIG: {% include '@Contao/collapsible_sidebar_toggle' with {'aria_controls': css_id} %}
+            Contao Insert Tag: {{ '{{collapsible_sidebar_toggle::' ~ css_id ~ '}}'|raw }}
         #}
-        {{ '{{collapsible_sidebar_toggle::' ~ css_id ~ '}}'|raw }}
+        {% include '@Contao/collapsible_sidebar_toggle' with {'aria_controls': css_id} %}
         {#
         Customizing the toggle button:
         Feel free and build your own version of the toggle button. Be aware to not forget the mandatory class- and aria-attributes!:

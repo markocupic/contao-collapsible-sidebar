@@ -25,39 +25,46 @@ Add the newly created module to your layout.
 
 
 ### 3. Customize the `mod_collapsible_sidebar.html.twig` template
-Customize the template `mod_collapsible_sidebar.html.twig`.
-E.g. use the {{insert_module}} or {{insert_article}} insert tags to add more content. 
-When you're done, you should save then customized template to the `templates/` folder.
+Use the {{insert_module}} or {{insert_article}} insert tags to add more content.
+Save then customized template to the `templates/` folder.
 
 
 ### 4. Add a toggle button to the layout
-Add the "toggle sidebar" button to your layout using the provided insert tag: `{{collapsible_sidebar_toggle::##module_css_id##}}`. 
-Enter the **CSS-ID** of your **Collapsible Sidebar** module after `::` => `{{collapsible_sidebar_toggle::myCollapsibleSidebar}}`.
+Add the "toggle sidebar" button to your layout using **TWIG include** or the provided **Contao Insert Tag**:
 
-Instead of using the `{{collapsible_sidebar_toggle::myCollapsibleSidebar}}` insert tag you can write your own "toggle sidebar" button. Dont forget to add all the mandatory attributes.
-
+#### a) TWIG include
 ```
-<!-- !!! mandatory attributes: class="collapsible-sidebar-toggle" aria-expanded="true" aria-haspopup="true" aria-controls="myCollapsibleSidebar" aria-hidden="false" -->
-<div id="myCollapsibleSidebarToggle" class="collapsible-sidebar-toggle" role="button" aria-expanded="true" aria-haspopup="true" aria-controls="collapsibleSidebar" aria-hidden="false">
-    <span class="icon">☰</span> Open Sidebar
-</div>
+set css_id = 'myCollapsibleSidebar'
+{% include '@Contao/collapsible_sidebar_toggle' with {'aria_controls': css_id} %}
 ```
 
-You can even create your custom `collapsible_sidebar_toggle.html.twig` template, which is used by the Insert Tag listener.
-Simply save the customized template to the templates folder: `templates/collapsible_sidebar_toggle.html.twig`.
+`{{collapsible_sidebar_toggle::##module_css_id##::##template_name##}}`.
+Enter the **CSS-ID** of the related **Collapsible Sidebar frontend module** as the first parameter => `{{collapsible_sidebar_toggle::myCollapsibleSidebar}}`.
+The second parameter ##template_name## is optional. You can use it to create your own version of the toggle button template. See 4c!
 
+#### b) Contao Insert Tag
 ```
-{# templates/collapsible_sidebar_toggle.html.twig #}
-
-<div id="myCollapsibleSidebarToggle" class="collapsible-sidebar-toggle" role="button" aria-expanded="true" aria-haspopup="true" aria-controls="{{ aria_controls }}" aria-hidden="false">
-    <span class="icon">☰</span> Open Sidebar
-</div>
+{{collapsible_sidebar_toggle::myCollapsibleSidebar}}
 ```
 
+#### c) Create a custom toggle button
+Copy [collapsible_sidebar_toggle.html.twig](https://github.com/markocupic/contao-collapsible-sidebar/blob/main/contao/templates/collapsible_sidebar_toggle.html.twig), modify the content and 
+save the file to the templates directory `templates/my_custom_collapsible_sidebar_toggle.html.twig`.
+
+**TWIG**:
+```
+set css_id = 'myCollapsibleSidebar'
+{% include '@Contao/my_custom_collapsible_sidebar_toggle' with {'aria_controls': css_id} %}
+```
+
+**Contao Insert Tag**:
+```
+{{collapsible_sidebar_toggle::myCollapsibleSidebar::my_custom_collapsible_sidebar_toggle}}
+```
 
 ### 5. Use your own CSS to style the application
-The extension is shipped with a very minimalistic stylesheet. To override the default CSS remove `{% do addCssResource('bundles/markocupiccontaocollapsiblesidebar/css/collapsible_sidebar.css') %}` in the head of your customized module template `/templates/mod_collapsible_sidebar.html.twig` and use your own stylesheet.
+The extension is shipped with a very minimalistic stylesheet. To override the default CSS simply remove `{% do addCssResource('bundles/markocupiccontaocollapsiblesidebar/css/collapsible_sidebar.css') %}` in the head of your customized module template `/templates/mod_collapsible_sidebar.html.twig` and embed your own stylesheet.
 
 
-### 6. Clear and renew the cache
+### 6. Finally done!
 Use `composer install` or the Contao Manager to rebuild the cache.
